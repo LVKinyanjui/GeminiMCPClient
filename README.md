@@ -32,7 +32,11 @@ To set up and run the Gemini MCP Client:
    uv pip install -r uv.lock
    ```
 3. **Set up your environment variables:**
-   - Create a `.env` file and add your API keys (e.g., `GEMINI_API_KEY` or `GOOGLE_API_KEY`).
+   - You must have a Google API key `GOOGLE_API_KEY` configured. This can be set in your shell environment or by creating a `.env` file in the project root with the following content:
+     ```env
+     GOOGLE_API_KEY=your-google-api-key-here
+     ```
+   - The client will automatically load these keys from the environment or `.env` file.
 
 4. **Run the client:**
    ```bash
