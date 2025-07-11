@@ -95,7 +95,7 @@ class MCPClientGemini:
                     name=tool_name,
                     response={"result": tool_result.content}
                 )
-                contents.append(response.candidates[0].content) # Append the content from the model's response.
+                contents.append(result.candidates[0].content) # Append the content from the model's response.
                 contents.append(types.Content(role="user", parts=[function_response_part])) # Append the function response
                 
                 # Continue the conversation with the function response
