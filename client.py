@@ -24,12 +24,21 @@ class MCPClientGemini:
     async def connect_to_server(self, server_script_path: str):
         is_python = server_script_path.endswith('.py')
         is_js = server_script_path.endswith('.js')
-        if not (is_python or is_js):
-            raise ValueError("Server script must be a .py or .js file")
-        command = "python" if is_python else "node"
+        is_ts = server_script_path.endswith('.ts')
+
+        command = None
+        if is_python:
+            command = "python"
+        elif is_js:
+            command = "node"
+        elif is_ts:
+            command = "npx"
+        else:
+            raise ValueError("Unsupported server script type. Use .py, .js or .ts files.")
+        
         server_params = StdioServerParameters(
             command=command,
-            args=[server_script_path],
+            args=[server_script_path] if is_python or is_js else ["tsx", server_script_path],
             env=None
         )
         stdio_transport = await self.exit_stack.enter_async_context(stdio_client(server_params))
