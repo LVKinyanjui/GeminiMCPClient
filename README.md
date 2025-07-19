@@ -21,16 +21,17 @@ This is the first release and should be considered **alpha**. The API and featur
 
 To set up and run the Gemini MCP Client:
 
-1. **Install [uv](https://github.com/astral-sh/uv):**
-   ```bash
-   pip install uv
-   ```
+1. **Install [uv](https://docs.astral.sh/uv/getting-started/installation/):**  
+This is for managing our isolated virtual environments.
+
 2. **Create a virtual environment and install dependencies:**
    ```bash
    uv venv .venv
    source .venv/bin/activate
-   uv pip install -r uv.lock
-   ```
+   uv sync
+   ```  
+   More information about dependency resolution in uv can be found [here](https://docs.astral.sh/uv/concepts/projects/sync/).
+
 3. **Set up your environment variables:**
    - You must have a Google API key `GOOGLE_API_KEY` configured. This can be set in your shell environment or by creating a `.env` file in the project root with the following content:
      ```env
@@ -50,8 +51,24 @@ To set up and run the Gemini MCP Client:
 
 The client will start an interactive chat loop. Type your queries or 'quit' to exit.
 
-## License
-See the repository for license details.
+## Running MCP Servers
+You can find a list of open mcp servers to experiment with in this [repo](https://github.com/punkpeye/awesome-mcp-servers).  
+Note that servers can be written in a variety of languages. This mcp client can only handle the following:  
+- Python
+- Javascript
+- Typescript
 
----
-For questions or support, please open an issue or contact the maintainers.
+### Dependencies
+You are only meant to setup your environment for the kinds of servers you intend to use. If your server is in python, only those dependencies are relevant.
+
+1. **Python**  
+These will be specified in uv's lock file and will be installed when `uv sync` is run.
+2. **Javascript**  
+Requires the `node` runtime to be installed. Find the install steps [here](https://nodejs.org/en/download).
+3. **Typescript**  
+Requires `tsx` (an execution environment) to be installed. Install it after you have installed `node`. You'll find install steps [here](https://nodejs.org/en/learn/typescript/run#running-typescript-code-with-tsx).
+
+
+## LImitations
+Currently only one server can be run at a time. Running multiple servers will be addressed in future releases.
+
